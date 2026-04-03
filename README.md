@@ -18,15 +18,27 @@ A role-based finance dashboard system built with FastAPI, PostgreSQL, and React.
 ---
 
 ## Project Structure
-
+```
 finance-dashboard/ 
 │
 ├── app/ 
 │ ├── api/v1/ # Route handlers (HTTP layer only) 
 │ ├── core/ # Config, security, JWT, dependencies 
 │ ├── db/ # Database session and base models 
-│ ├── models/ # SQLAlchemy ORM models │ ├── schemas/ # Pydantic request/response schemas │ ├── services/ # Business logic layer │ ├── middleware/ # RBAC access control │ └── main.py # App entry point │ ├── alembic/ # Database migrations ├── frontend/ # React + Vite UI ├── tests/ # Test cases │ ├── seed.py # Demo data seeder ├── requirements.txt ├── alembic.ini ├── README.md 
-
+│ ├── models/ # SQLAlchemy ORM models 
+│ ├── schemas/ # Pydantic request/response schemas 
+│ ├── services/ # Business logic layer 
+│ ├── middleware/ # RBAC access control 
+│ └── main.py # App entry point 
+│ ├── alembic/ # Database migrations 
+├── frontend/ # React + Vite UI 
+├── tests/ # Test cases 
+│ 
+├── seed.py # Demo data seeder 
+├── requirements.txt 
+├── alembic.ini 
+├── README.md 
+```
 ---
 
 ## Setup Instructions
