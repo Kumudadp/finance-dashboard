@@ -52,7 +52,7 @@ class FinancialRecord(Base, TimestampMixin):
     description = Column(Text, nullable=True)
     is_deleted = Column(Boolean, default=False, nullable=False)
 
-    # Foreign key — which user created this record
+    # Foreign key = which user created this record
     user_id = Column(
         UUID(as_uuid=True),
         ForeignKey('users.id', ondelete='SET NULL'),
