@@ -128,9 +128,11 @@ role using Depends(require_admin) or Depends(require_analyst_or_above).
 ## API Endpoints
 
 ### Authentication
+```
   POST   /api/v1/auth/login
-
+```
 ### Users (Admin only)
+```
   GET    /api/v1/users/
   POST   /api/v1/users/
   GET    /api/v1/users/{id}
@@ -138,17 +140,19 @@ role using Depends(require_admin) or Depends(require_analyst_or_above).
   PATCH  /api/v1/users/{id}/activate
   PATCH  /api/v1/users/{id}/deactivate
   DELETE /api/v1/users/{id}
-
+```
 ### Financial Records
+```
   GET    /api/v1/records/            Analyst + Admin
   POST   /api/v1/records/            Admin only
   GET    /api/v1/records/{id}        Analyst + Admin
   PATCH  /api/v1/records/{id}        Admin only
   DELETE /api/v1/records/{id}        Admin only (soft delete)
-
+```
 ### Dashboard
+```
   GET    /api/v1/dashboard/summary   All roles
-
+```
 Full interactive docs available at /docs (Swagger UI).
 
 ---
@@ -156,30 +160,36 @@ Full interactive docs available at /docs (Swagger UI).
 ## Key Design Decisions
 
 ### UUID Primary Keys
+
 Integer IDs expose record counts and are guessable.
 UUIDs are non-sequential and safer for financial data.
 
 ### Numeric(15,2) for Money
+
 Float has rounding errors in binary representation.
 Financial amounts always use Decimal/Numeric to avoid
 precision loss. This is standard in fintech systems.
 
 ### Soft Delete Pattern
+
 Financial records are never hard deleted.
 The is_deleted flag preserves full audit history.
 This mirrors real-world compliance requirements where
 transaction records must be retained.
 
 ### Separation of Concerns
+
 Routes handle HTTP only - request in, response out.
 All business rules live in the services layer.
 This makes logic independently testable.
 
 ### Alembic Migrations
+
 Every schema change is versioned and reproducible.
 Mirrors how production database changes are managed.
 
 ### Connection Pooling
+
 pool_pre_ping=True detects dropped DB connections.
 pool_size and max_overflow handle concurrent requests.
 
@@ -212,7 +222,7 @@ pool_size and max_overflow handle concurrent requests.
 ---
 
 ## Database Schema
-
+```
   users
     id               UUID PRIMARY KEY
     full_name        VARCHAR(100)
@@ -234,12 +244,13 @@ pool_size and max_overflow handle concurrent requests.
     user_id          UUID FOREIGN KEY -> users.id
     created_at       TIMESTAMPTZ
     updated_at       TIMESTAMPTZ
-
+```
 ---
 
 ## Tradeoffs
-
+```
 - SQLite was replaced with PostgreSQL for production readiness.
 - Pydantic v2 is stricter than v1 but gives better validation errors.
 - Soft delete adds a filter to every query but preserves data integrity.
 - JWT is stateless (no server-side session) which is simpler to scale.
+```
