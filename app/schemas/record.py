@@ -1,7 +1,7 @@
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel
 from uuid import UUID
 from datetime import date, datetime
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal
 from typing import Optional
 from app.models.record import RecordType, RecordCategory
 
@@ -13,30 +13,12 @@ class RecordCreate(BaseModel):
     date: date
     description: Optional[str] = None
 
-    @model_validator(mode='after')
-    def check_amount(self):
-        if self.amount <= 0:
-            raise ValueError('Amount must be greater than zero')
-        # Round to 2 decimal places
-        self.amount = self.amount.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-        return self
-
 
 class RecordUpdate(BaseModel):
     amount: Optional[Decimal] = None
     type: Optional[RecordType] = None
     category: Optional[RecordCategory] = None
-    date: Optional[date] = None
     description: Optional[str] = None
-
-    @model_validator(mode='after')
-    def check_amount(self):
-        if self.amount is not None:
-            if self.amount <= 0:
-                raise ValueError('Amount must be greater than zero')
-            # Round to 2 decimal places
-            self.amount = self.amount.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-        return self
 
 
 class RecordResponse(BaseModel):

@@ -74,6 +74,14 @@ export default function Login() {
             <span style={styles.hintRole}>Admin</span>
             <span style={styles.hintCred}>admin@finance.com / Admin1234</span>
           </div>
+          <div style={styles.hintRow}>
+            <span style={styles.hintRole}>Analyst</span>
+            <span style={styles.hintCred}>analyst@finance.com / Analyst1234</span>
+          </div>
+          <div style={styles.hintRow}>
+            <span style={styles.hintRole}>Viewer</span>
+            <span style={styles.hintCred}>viewer@finance.com / Viewer1234</span>
+          </div>
         </div>
       </div>
     </div>
@@ -95,7 +103,7 @@ const styles = {
   btn:{background:'#6c63ff',color:'#fff',border:'none',borderRadius:'8px',padding:'13px',fontSize:'15px',fontWeight:'600',cursor:'pointer',marginTop:'8px',width:'100%'},
   hint:{marginTop:'28px',background:'#1a1d27',borderRadius:'8px',padding:'14px 16px',border:'1px solid #2a2d3e'},
   hintTitle:{fontSize:'11px',fontWeight:'600',color:'#64748b',textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'8px'},
-  hintRow:{display:'flex',alignItems:'center',gap:'10px'},
+  hintRow:{display:'flex',alignItems:'center',gap:'10px',marginBottom:'8px'},
   hintRole:{background:'rgba(108,99,255,0.2)',color:'#6c63ff',padding:'2px 8px',borderRadius:'4px',fontSize:'12px',fontWeight:'600'},
   hintCred:{fontSize:'13px',color:'#94a3b8'},
 };

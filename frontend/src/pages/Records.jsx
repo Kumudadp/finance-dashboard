@@ -25,7 +25,7 @@ function Modal({ title, onClose, children }) {
   );
 }
 
-function RecordForm({ form, setForm, error, onSubmit, onCancel, label, saving }) {
+function RecordForm({ form, setForm, error, onSubmit, onCancel, label, saving, isEdit }) {
   const set = (k, v) => setForm(p => ({ ...p, [k]: v }));
   return (
     <form onSubmit={onSubmit}>
@@ -42,17 +42,19 @@ function RecordForm({ form, setForm, error, onSubmit, onCancel, label, saving })
             {TYPES.map(t => <option key={t} value={t}>{t}</option>)}
           </select>
         </div>
-        <div className="field">
+        <div className={isEdit ? "field field-full" : "field"}>
           <label className="field-label">Category</label>
           <select className="field-input" value={form.category} onChange={e => set('category', e.target.value)}>
             {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
         </div>
-        <div className="field">
-          <label className="field-label">Date</label>
-          <input className="field-input" type="date"
-            value={form.date} onChange={e => set('date', e.target.value)} required />
-        </div>
+        {!isEdit && (
+          <div className="field">
+            <label className="field-label">Date</label>
+            <input className="field-input" type="date"
+              value={form.date} onChange={e => set('date', e.target.value)} required />
+          </div>
+        )}
         <div className="field field-full">
           <label className="field-label">Description (optional)</label>
           <input className="field-input" type="text" placeholder="e.g. Monthly salary"
@@ -132,7 +134,6 @@ export default function Records() {
       amount:      String(parseFloat(r.amount)),
       type:        r.type,
       category:    r.category,
-      date:        r.date,
       description: r.description || '',
     });
     setEError('');
@@ -147,7 +148,6 @@ export default function Records() {
         amount:   parseFloat(eForm.amount),
         type:     eForm.type,
         category: eForm.category,
-        date:     eForm.date,
       };
       if (eForm.description && eForm.description.trim() !== '') {
         payload.description = eForm.description.trim();
@@ -194,7 +194,7 @@ export default function Records() {
         <Modal title="New Financial Record" onClose={() => { setShowCreate(false); setCForm({...EMPTY}); }}>
           <RecordForm form={cForm} setForm={setCForm} error={cError}
             onSubmit={handleCreate} onCancel={() => { setShowCreate(false); setCForm({...EMPTY}); }}
-            label="Save Record" saving={saving} />
+            label="Save Record" saving={saving} isEdit={false} />
         </Modal>
       )}
 
@@ -202,7 +202,7 @@ export default function Records() {
         <Modal title="Edit Record" onClose={() => { setEditRec(null); setEForm({...EMPTY}); }}>
           <RecordForm form={eForm} setForm={setEForm} error={eError}
             onSubmit={handleUpdate} onCancel={() => { setEditRec(null); setEForm({...EMPTY}); }}
-            label="Update Record" saving={saving} />
+            label="Update Record" saving={saving} isEdit={true} />
         </Modal>
       )}
 
