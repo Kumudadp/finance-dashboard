@@ -30,11 +30,9 @@ finance-dashboard/
 │ ├── services/ # Business logic layer 
 │ ├── middleware/ # RBAC access control 
 │ └── main.py # App entry point 
-│
 ├── alembic/ # Database migrations 
 ├── frontend/ # React + Vite UI 
 ├── tests/ # Test cases 
-│ 
 ├── seed.py # Demo data seeder 
 ├── requirements.txt 
 ├── alembic.ini 
@@ -85,17 +83,19 @@ finance-dashboard/
 ```bash
   uvicorn app.main:app --reload
 ```
+```
   API: http://localhost:8000
   Swagger docs: http://localhost:8000/docs
-
+```
 ### 8. Start frontend
 ```bash
   cd frontend
   npm install
   npm run dev
 ```
+```
   Frontend: http://localhost:5173
-
+```
 ---
 
 ## Demo Credentials
@@ -162,6 +162,7 @@ Full interactive docs available at /docs (Swagger UI).
 ### UUID Primary Keys
 
 Integer IDs expose record counts and are guessable.
+
 UUIDs are non-sequential and safer for financial data.
 
 ### Numeric(15,2) for Money
