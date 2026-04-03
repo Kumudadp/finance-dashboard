@@ -168,30 +168,38 @@ UUIDs are non-sequential and safer for financial data.
 ### Numeric(15,2) for Money
 
 Float has rounding errors in binary representation.
+
 Financial amounts always use Decimal/Numeric to avoid
-precision loss. This is standard in fintech systems.
+precision loss.
+This is standard in fintech systems.
 
 ### Soft Delete Pattern
 
 Financial records are never hard deleted.
+
 The is_deleted flag preserves full audit history.
+
 This mirrors real-world compliance requirements where
 transaction records must be retained.
 
 ### Separation of Concerns
 
 Routes handle HTTP only - request in, response out.
+
 All business rules live in the services layer.
+
 This makes logic independently testable.
 
 ### Alembic Migrations
 
 Every schema change is versioned and reproducible.
+
 Mirrors how production database changes are managed.
 
 ### Connection Pooling
 
 pool_pre_ping=True detects dropped DB connections.
+
 pool_size and max_overflow handle concurrent requests.
 
 ---
@@ -233,7 +241,8 @@ pool_size and max_overflow handle concurrent requests.
     is_active        BOOLEAN DEFAULT true
     created_at       TIMESTAMPTZ
     updated_at       TIMESTAMPTZ
-
+```
+```
   financial_records
     id               UUID PRIMARY KEY
     amount           NUMERIC(15,2)
