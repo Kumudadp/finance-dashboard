@@ -221,7 +221,7 @@ pool_size and max_overflow handle concurrent requests.
 
 ## Assumptions Made
 
-1. A seed script creates demo users for all three roles.
+1. A seed script creates demo users for admin role.
 2. Soft delete is used for records to preserve audit history.
 3. Deactivated users cannot log in but their data is preserved.
 4. All monetary amounts are in INR.
