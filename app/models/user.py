@@ -31,7 +31,7 @@ class User(Base, TimestampMixin):
     )
     is_active = Column(Boolean, default=True, nullable=False)
 
-    # Relationship — one user can have many financial records
+    # Relationship = one user can have many financial records
     records = relationship(
         'FinancialRecord',
         back_populates='created_by',
