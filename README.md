@@ -45,50 +45,50 @@ finance-dashboard/
 - Node.js 18+
 
 ### 1. Clone and create virtual environment
-
+```bash
   git clone https://github.com/Kumudadp/finance-dashboard.git
   cd finance-dashboard
   python -m venv venv
   venv\Scripts\activate
-
+```
 ### 2. Install dependencies
-
+```bash
   pip install -r requirements.txt
-
+```
 ### 3. PostgreSQL setup
-
+```bash
   psql -U postgres
   CREATE DATABASE finance_dashboard;
   CREATE USER finance_user WITH PASSWORD 'securepassword123';
   GRANT ALL PRIVILEGES ON DATABASE finance_dashboard TO finance_user;
   GRANT ALL ON SCHEMA public TO finance_user;
   \q
-
+```
 ### 4. Configure environment
 
   Copy .env.example to .env and update if needed.
 
 ### 5. Run migrations
-
+```bash
   alembic upgrade head
-
+```
 ### 6. Seed demo users
-
+```bash
   python seed.py
-
+```
 ### 7. Start backend
-
+```bash
   uvicorn app.main:app --reload
-
+```
   API: http://localhost:8000
   Swagger docs: http://localhost:8000/docs
 
 ### 8. Start frontend
-
+```bash
   cd frontend
   npm install
   npm run dev
-
+```
   Frontend: http://localhost:5173
 
 ---
