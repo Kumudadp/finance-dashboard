@@ -30,7 +30,8 @@ finance-dashboard/
 │ ├── services/ # Business logic layer 
 │ ├── middleware/ # RBAC access control 
 │ └── main.py # App entry point 
-│ ├── alembic/ # Database migrations 
+│
+├── alembic/ # Database migrations 
 ├── frontend/ # React + Vite UI 
 ├── tests/ # Test cases 
 │ 
