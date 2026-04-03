@@ -5,6 +5,7 @@ from app.core.config import settings
 # Railway provides DATABASE_URL starting with postgres://
 # SQLAlchemy needs postgresql://
 database_url = settings.DATABASE_URL
+print("DATABASE_URL:", database_url)
 if database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://", 1)
 
