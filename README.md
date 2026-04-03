@@ -259,7 +259,7 @@ pool_size and max_overflow handle concurrent requests.
 
 ## Tradeoffs
 ```
-- SQLite was replaced with PostgreSQL for production readiness.
+- PostgreSQL is used for production readiness.
 - Pydantic v2 is stricter than v1 but gives better validation errors.
 - Soft delete adds a filter to every query but preserves data integrity.
 - JWT is stateless (no server-side session) which is simpler to scale.
