@@ -1,7 +1,7 @@
 import uuid
 from sqlalchemy import (
     Column, String, Numeric, Enum as SAEnum,
-    Date, Text, Boolean, ForeignKey
+    Date, Text, Boolean, ForeignKey, Index
 )
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
@@ -36,29 +36,26 @@ class FinancialRecord(Base, TimestampMixin):
         default=uuid.uuid4,
         index=True,
     )
-    amount = Column(
-        Numeric(precision=15, scale=2),
-        nullable=False,
-    )
-    type = Column(
-        SAEnum(RecordType, name='recordtype'),
-        nullable=False,
-    )
-    category = Column(
-        SAEnum(RecordCategory, name='recordcategory'),
-        nullable=False,
-    )
+    amount = Column(Numeric(precision=15, scale=2), nullable=False)
+    type = Column(SAEnum(RecordType, name='recordtype'), nullable=False)
+    category = Column(SAEnum(RecordCategory, name='recordcategory'), nullable=False)
     date = Column(Date, nullable=False)
     description = Column(Text, nullable=True)
     is_deleted = Column(Boolean, default=False, nullable=False)
 
-    # Foreign key = which user created this record
     user_id = Column(
         UUID(as_uuid=True),
         ForeignKey('users.id', ondelete='SET NULL'),
         nullable=True,
     )
     created_by = relationship('User', back_populates='records')
+
+    __table_args__ = (
+        Index('ix_records_user_date', 'user_id', 'date'),
+        Index('ix_records_type', 'type'),
+        Index('ix_records_category', 'category'),
+        Index('ix_records_is_deleted', 'is_deleted'),
+    )
 
     def __repr__(self):
         return f'<FinancialRecord {self.type} | {self.amount} | {self.category}>'
